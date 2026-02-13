@@ -113,8 +113,21 @@ def test_signaller_tread_rule() -> None:
 
 def test_signaller_breakout_rule() -> None:
     df = add_indicators(_make_signaller_base())
+    df.loc[df.index[-1], "Close"] = df.loc[df.index[-1], "Close"] + 2
+    df.loc[df.index[-1], "High"] = df.loc[df.index[-1], "Close"] + 1
     result = signal_symbol("TEST", df)
     assert result["signal"] is True
+
+
+def test_signaller_breakout_requires_close() -> None:
+    df = add_indicators(_make_signaller_base())
+    prior_window = df.tail(64).iloc[:-1]
+    peak_high = float(prior_window["High"].max())
+    df.loc[df.index[-1], "Close"] = peak_high - 1
+    df.loc[df.index[-1], "High"] = peak_high + 1
+    result = signal_symbol("TEST", df)
+    assert result["signal"] is False
+    assert "no_breakout" in result["reasons"]
 
 
 def test_executor_position_sizing() -> None:

@@ -42,7 +42,7 @@ def signal_symbol(symbol: str, df: pd.DataFrame) -> dict:
         if retracement >= 0.25:
             reasons.append("tread_retracement_too_large")
 
-    if latest["High"] <= peak_high:
+    if latest["Close"] <= peak_high:
         reasons.append("no_breakout")
 
     signal = not reasons

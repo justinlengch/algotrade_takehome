@@ -62,7 +62,17 @@ def main() -> None:
     asof_date = None
     data = full_data
     if args.asof:
-        asof_date = pd.to_datetime(args.asof)
+        requested = pd.to_datetime(args.asof)
+        available_dates = full_data.index
+        if requested not in available_dates:
+            prior_dates = available_dates[available_dates <= requested]
+            if prior_dates.empty:
+                raise ValueError(
+                    f"No data available on or before {requested.date()}."
+                )
+            asof_date = prior_dates.max()
+        else:
+            asof_date = requested
         data = full_data.loc[:asof_date]
 
     console = Console()
