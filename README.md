@@ -1,4 +1,4 @@
-# UGA Advisory Takehome - Systematic Momentum Trading
+# Systematic Momentum Trading
 
 Python implementation of a 3-stage pipeline:
 - `Screener`: liquidity + trend filters
