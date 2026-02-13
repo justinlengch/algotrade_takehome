@@ -83,7 +83,7 @@ Arguments:
 ## Tests
 
 ```bash
-pytest -q
+pytest -v
 ```
 
 ## Project Structure
