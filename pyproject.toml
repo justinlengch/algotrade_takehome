@@ -1,0 +1,13 @@
+[project]
+name = "ugadvisory-takehome"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "numpy>=2.4.2",
+    "pandas>=3.0.0",
+    "rich>=13.7.1",
+    "pytest>=8.3.4",
+    "yfinance>=1.1.0",
+]
